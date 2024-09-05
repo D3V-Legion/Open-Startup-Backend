@@ -1,0 +1,24 @@
+{
+  "name": "open-startup-backend",
+  "version": "0.0.1",
+  "description": "Backend para Open Startup",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node --watch index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "jwt",
+    "prisma",
+    "express"
+  ],
+  "author": "Yeltsin Reyes",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}
