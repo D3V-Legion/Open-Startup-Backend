@@ -17,3 +17,5 @@ const createUser = async (email, name, lastname, password) => {
     return { status: 500, message: error.message };
   }
 };
+
+module.exports = { createUser };

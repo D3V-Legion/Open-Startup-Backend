@@ -21,4 +21,4 @@ const registerUser = async (req, res) => {
   res.status(result.status).json(result.message);
 };
 
-module.exports = registerUser;
+module.exports = { registerUser };
