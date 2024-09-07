@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
     return res.status(400).json({ message: "Invalid email" });
   }
   const result = await usersService.createUser(email, name, lastname, password);
-  res.status(result.status).json(result.message);
+  res.status(result.status).json({ message: result.message, user: result.user });
 };
 
 module.exports = { registerUser };

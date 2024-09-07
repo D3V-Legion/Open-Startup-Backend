@@ -14,7 +14,7 @@ const createUser = async (email, name, lastname, password) => {
     });
     return { status: 201, message: "User created successfully", user };
   } catch (error) {
-    return { status: 500, message: error.message };
+    return { status: 500, message: "This email is already registered", user: null };
   }
 };
 
