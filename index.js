@@ -13,7 +13,7 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
 
 // Test connection to PostgreSQL using Prisma
-const testConnection = async () => {
+const testDBConnection = async () => {
   try {
     // Intentar una simple consulta para verificar la conexión
     await prisma.$connect();
@@ -45,6 +45,6 @@ app.get("/", (req, res) => {
 
 // Start server
 app.listen(3000, () => {
-  testConnection();
+  testDBConnection();
   console.log("Server is running on port 3000");
 });
