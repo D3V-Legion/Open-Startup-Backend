@@ -1,3 +1,12 @@
+function validateFields(fields) {
+  const { email, name, lastname, password } = fields;
+  if (!email || !name || !lastname || !password) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function validateEmail(email) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   return emailRegex.test(email);
@@ -14,4 +23,4 @@ function validatePassword(password) {
   else return true;
 }
 
-module.exports = { validateEmail, validatePassword };
+module.exports = { validateFields, validateEmail, validatePassword };
