@@ -6,8 +6,22 @@ const SECRET_KEY = process.env.SECRET_KEY;
 
 const prisma = new PrismaClient();
 
+const doesUserAlreadyExist = async (email) => {
+  const user = await prisma.user.findUnique({
+    where: {
+      email,
+    },
+  });
+  return user || false;
+};
 const userCreate = async (email, name, lastname, password) => {
   try {
+    if (await doesUserAlreadyExist(email)) {
+      return {
+        status: 400,
+        message: "User already exists",
+      };
+    }
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = await prisma.user.create({
       data: {
@@ -31,17 +45,13 @@ const userCreate = async (email, name, lastname, password) => {
   } catch (error) {
     return {
       status: 500,
-      message: "This email is already registered",
+      message: error.message,
     };
   }
 };
 
 const userLogin = async (email, password) => {
-  const user = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
+  const user = await doesUserAlreadyExist(email);
   if (!user) {
     return {
       status: 404,
