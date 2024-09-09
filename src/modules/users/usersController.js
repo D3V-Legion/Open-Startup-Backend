@@ -1,17 +1,18 @@
 const usersService = require("./usersService");
 const {
-  validateFields,
+  validateUserLoginFields,
+  validateUserRegisterFields,
   validateEmail,
   validatePassword,
 } = require("../../utils/validators");
 
-const registerUser = async (req, res) => {
+const handleUserRegister = async (req, res) => {
   // Destructure the email, name, lastname, and password fields from req.body
   const { email, name, lastname, password } = req.body;
 
   //#region Validate fields
   // Check if the fields are valid
-  if (!validateFields(req.body)) {
+  if (!validateUserRegisterFields(req.body)) {
     return res.status(400).json({ message: "All fields are required" });
   }
   // Check if the email is valid
@@ -28,10 +29,33 @@ const registerUser = async (req, res) => {
   //#endregion
 
   // Call the createUser method from the usersService
-  const result = await usersService.createUser(email, name, lastname, password);
+  const result = await usersService.userCreate(email, name, lastname, password);
   res
     .status(result.status)
     .json({ message: result.message, user: result.user });
 };
 
-module.exports = { registerUser };
+const handleUserLogin = async (req, res) => {
+  // Destructure the email and password fields from req.body
+  const { email, password } = req.body;
+
+  //#region Validate fields
+  // Check if the fields are valid
+  if (!validateUserLoginFields(req.body)) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+  if (!validateEmail(email)) {
+    return res.status(400).json({ message: "Invalid email" });
+  }
+  if (!validatePassword(password)) {
+    return res.status(400).json({ message: "Invalid password" });
+  }
+  //#endregion
+
+  // Call the login method from the usersService
+  const result = await usersService.userLogin(email, password);
+  res
+    .status(result.status)
+    .json({ message: result.message, token: result.token || null });
+};
+module.exports = { handleUserRegister, handleUserLogin };

@@ -1,6 +1,15 @@
-function validateFields(fields) {
+function validateUserRegisterFields(fields) {
   const { email, name, lastname, password } = fields;
   if (!email || !name || !lastname || !password) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+function validateUserLoginFields(fields) {
+  const { email, password } = fields;
+  if (!email || !password) {
     return false;
   } else {
     return true;
@@ -23,4 +32,4 @@ function validatePassword(password) {
   else return true;
 }
 
-module.exports = { validateFields, validateEmail, validatePassword };
+module.exports = { validateUserLoginFields, validateUserRegisterFields, validateEmail, validatePassword };
