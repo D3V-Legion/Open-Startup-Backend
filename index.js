@@ -1,4 +1,5 @@
 //#region Initialize and configure the Express server
+
 // Imports
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
@@ -28,6 +29,7 @@ const testDBConnection = async () => {
 //#endregion
 
 //#region Define and apply routes
+
 // Import Routes
 const userRoutes = require("./src/modules/users/usersRoutes");
 // Apply Routes
