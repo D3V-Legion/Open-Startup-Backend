@@ -64,7 +64,7 @@ const userLogin = async (email, password) => {
       message: "Invalid password",
     };
   }
-  const token = jwt.sign({ userId: user.id }, SECRET_KEY, { expiresIn: "8h" });
+  const token = jwt.sign({ id: user.id }, SECRET_KEY, { expiresIn: "8h" });
   return {
     status: 200,
     message: "User logged in successfully",
@@ -72,4 +72,32 @@ const userLogin = async (email, password) => {
   };
 };
 
-module.exports = { userCreate, userLogin };
+const getUserProfileByID = async (userId) => {
+  try{
+  const user = await prisma.user.findUnique({
+    where: {
+      id: parseInt(userId),
+    },
+  });
+
+  if (user) {
+    return {
+      status: 200,
+      user: {
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        lastname: user.lastname,
+        createadAt: user.createdAt,
+      },
+    };
+  }
+} catch (error) {
+  return {
+    status: 500,
+    message: error.message,
+  };
+}
+};
+
+module.exports = { userCreate, userLogin, getUserProfileByID };

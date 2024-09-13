@@ -58,4 +58,14 @@ const handleUserLogin = async (req, res) => {
     .status(result.status)
     .json({ message: result.message, token: result.token || null });
 };
-module.exports = { handleUserRegister, handleUserLogin };
+
+const handleGetUserProfile = async (req, res) => {
+  // Get the userId from the req object
+  const userId = req.id;
+
+  // Call the getUserById method from the usersService
+  const user = await usersService.getUserProfileByID(userId);
+  res.status(200).json(user);
+}
+
+module.exports = { handleUserRegister, handleUserLogin, handleGetUserProfile };
