@@ -32,8 +32,10 @@ const testDBConnection = async () => {
 
 // Import Routes
 const userRoutes = require("./src/modules/users/usersRoutes");
+const collaborationRoutes = require("./src/modules/collaboration/collaborationRoutes");
 // Apply Routes
 app.use("/", userRoutes);
+app.use("/", collaborationRoutes);
 
 // Default GET route
 app.get("/", (req, res) => {
