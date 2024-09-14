@@ -1,7 +1,7 @@
 function validateUserRegisterFields(fields) {
-  const { email, name, lastname, password } = fields;
-  email.trim(); name.trim(); lastname.trim(); password.trim();
-  if (!email || !name || !lastname || !password) {
+  const { email, firstname, lastname, password } = fields;
+  email.trim(); firstname.trim(); lastname.trim(); password.trim();
+  if (!email || !firstname || !lastname || !password) {
     return false;
   } else {
     return true;

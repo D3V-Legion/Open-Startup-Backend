@@ -16,11 +16,109 @@ datasource db {
 // * Models
 // User
 model User {
-  id        Int   @id @default(autoincrement())
-  email     String   @unique
-  name      String
-  lastname  String
-  password  String
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  firstname   String
+  lastname    String
+  password    String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  ProjectUser ProjectUser[]
+  BoardUser   BoardUser[]
+  TaskUser    TaskUser[]
+}
+
+// * Kanban
+// Project
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  boards      Board[]
+  ProjectUser ProjectUser[]
+}
+
+// Board
+model Board {
+  id        Int      @id @default(autoincrement())
+  title     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  lists     List[]
+  Project   Project?    @relation(fields: [projectId], references: [id])
+  projectId Int?
+  BoardUser BoardUser[]
+}
+
+// List
+model List {
+  id        Int      @id @default(autoincrement())
+  title     String
+  position  Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tasks   Task[]
+  Board   Board? @relation(fields: [boardId], references: [id])
+  boardId Int?
+}
+
+// Task
+model Task {
+  id          Int       @id @default(autoincrement())
+  title       String
+  description String?
+  dueDate     DateTime?
+  position    Int
+  isCompleted Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  List     List?      @relation(fields: [listId], references: [id])
+  listId   Int?
+  TaskUser TaskUser[]
+}
+
+// * Kanban x User
+// Project x User
+model ProjectUser {
+  id        Int      @id @default(autoincrement())
+  role      Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User      User    @relation(fields: [userId], references: [id])
+  userId    Int
+  Project   Project @relation(fields: [projectId], references: [id])
+  projectId Int
+}
+
+// Board x User
+model BoardUser {
+  id        Int      @id @default(autoincrement())
+  role      Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User    User  @relation(fields: [userId], references: [id])
+  userId  Int
+  Board   Board @relation(fields: [boardId], references: [id])
+  boardId Int
+}
+
+// Task x User
+model TaskUser {
+  id        Int      @id @default(autoincrement())
+  role      Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User @relation(fields: [userId], references: [id])
+  userId Int
+  Task   Task @relation(fields: [taskId], references: [id])
+  taskId Int
 }

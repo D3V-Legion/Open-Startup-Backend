@@ -14,7 +14,7 @@ const doesUserAlreadyExist = async (email) => {
   });
   return user || false;
 };
-const userCreate = async (email, name, lastname, password) => {
+const userCreate = async (email, firstname, lastname, password) => {
   try {
     if (await doesUserAlreadyExist(email)) {
       return {
@@ -26,7 +26,7 @@ const userCreate = async (email, name, lastname, password) => {
     const user = await prisma.user.create({
       data: {
         email,
-        name,
+        firstname,
         lastname,
         password: hashedPassword,
       },
@@ -37,7 +37,7 @@ const userCreate = async (email, name, lastname, password) => {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name,
+        firstname: user.firstname,
         lastname: user.lastname,
         createadAt: user.createdAt,
       },
@@ -86,7 +86,7 @@ const getUserProfileByID = async (userId) => {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name,
+        firstname: user.firstname,
         lastname: user.lastname,
         createadAt: user.createdAt,
       },

@@ -8,7 +8,7 @@ const {
 
 const handleUserRegister = async (req, res) => {
   // Destructure the email, name, lastname, and password fields from req.body
-  const { email, name, lastname, password } = req.body;
+  const { email, firstname, lastname, password } = req.body;
 
   //#region Validate fields
   // Check if the fields are valid
@@ -29,7 +29,7 @@ const handleUserRegister = async (req, res) => {
   //#endregion
 
   // Call the createUser method from the usersService
-  const result = await usersService.userCreate(email, name, lastname, password);
+  const result = await usersService.userCreate(email, firstname, lastname, password);
   res
     .status(result.status)
     .json({ message: result.message, user: result.user });
