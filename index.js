@@ -3,6 +3,7 @@
 // Imports
 const express = require("express");
 const { PrismaClient } = require("@prisma/client");
+const cors = require("cors");
 const morgan = require("morgan");
 
 // Init express
@@ -12,6 +13,7 @@ const app = express();
 const prisma = new PrismaClient();
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
 // Test connection to PostgreSQL using Prisma
 const testDBConnection = async () => {
