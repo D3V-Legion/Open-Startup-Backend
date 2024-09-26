@@ -1,19 +1,23 @@
 function validateUserRegisterFields(fields) {
   const { email, firstname, lastname, password } = fields;
-  email.trim(); firstname.trim(); lastname.trim(); password.trim();
   if (!email || !firstname || !lastname || !password) {
     return false;
   } else {
+    email.trim();
+    firstname.trim();
+    lastname.trim();
+    password.trim();
     return true;
   }
 }
 
 function validateUserLoginFields(fields) {
   const { email, password } = fields;
-  email.trim(); password.trim();
   if (!email || !password) {
     return false;
   } else {
+    email.trim();
+    password.trim();
     return true;
   }
 }
@@ -34,4 +38,9 @@ function validatePassword(password) {
   else return true;
 }
 
-module.exports = { validateUserLoginFields, validateUserRegisterFields, validateEmail, validatePassword };
+module.exports = {
+  validateUserLoginFields,
+  validateUserRegisterFields,
+  validateEmail,
+  validatePassword,
+};
