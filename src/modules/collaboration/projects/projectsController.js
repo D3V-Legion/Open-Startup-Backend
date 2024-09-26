@@ -1,4 +1,4 @@
-const collaborationService = require('./collaborationService');
+const collaborationProjectsService = require('./projectsService');
 
 const handleProjectCreate = async (req, res) => {
   const { title, description } = req.body;
@@ -7,7 +7,7 @@ const handleProjectCreate = async (req, res) => {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
-  const result = await collaborationService.createProject(title, description, req.id);
+  const result = await collaborationProjectsService.createProject(title, description, req.id);
   res.status(result.status).json({ message: result.message, project: result.project });
 }
 
