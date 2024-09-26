@@ -16,7 +16,7 @@
   "author": "Yeltsin Reyes",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@prisma/client": "^5.19.1",
+    "@prisma/client": "^5.20.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.21.0",
@@ -24,6 +24,6 @@
   },
   "devDependencies": {
     "morgan": "^1.10.0",
-    "prisma": "^5.19.1"
+    "prisma": "^5.20.0"
   }
 }
