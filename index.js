@@ -30,7 +30,7 @@ const testDBConnection = async () => {
 };
 //#endregion
 
-//#region Define and apply routes
+//#region Import and apply routes
 
 // Import Routes
 const userRoutes = require("./src/modules/users/usersRoutes");
